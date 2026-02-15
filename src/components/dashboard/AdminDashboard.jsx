@@ -83,7 +83,6 @@ import {
   Close as CloseIcon,
   Save as SaveIcon,
   CheckCircle as CheckCircleIcon,
-  Cancel as CancelIcon,
   Shield as ShieldIcon,
   VerifiedUser as VerifiedUserIcon,
   Block as BlockIcon,
@@ -94,7 +93,6 @@ import {
   GetApp as GetAppIcon,
   FileCopy as FileCopyIcon,
   Category as CategoryIcon,
-  AccountTree as AccountTreeIcon,
   Timeline as TimelineIcon
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -106,9 +104,6 @@ import {
   updateDoc, 
   addDoc,
   onSnapshot,
-  query,
-  where,
-  orderBy,
   getDoc
 } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
@@ -262,7 +257,7 @@ const AdminDashboard = () => {
       try {
         const configDoc = await getDoc(doc(db, 'configuracion', 'general'));
         if (configDoc.exists()) {
-          setConfigData({ ...configData, ...configDoc.data() });
+          setConfigData(prevConfig => ({ ...prevConfig, ...configDoc.data() }));
         }
       } catch (error) {
         console.error("Error cargando configuración:", error);

@@ -170,9 +170,11 @@ export const resetSystemConfig = async () => {
 //   initializeSystemConfig();
 // }, []);
 
-export default {
+const configModule = {
   initializeSystemConfig,
   updateSystemConfig,
   getSystemConfig,
   resetSystemConfig
 };
+
+export default configModule;

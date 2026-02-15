@@ -29,8 +29,7 @@ import {
   DialogActions,
   Tooltip,
   Divider,
-  LinearProgress,
-  Alert
+  LinearProgress
 } from '@mui/material';
 import {
   Search as SearchIcon,
@@ -48,7 +47,7 @@ import {
   Block as BlockIcon
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { db, auth } from '../../firebase/config';
 import usePermissions from '../../hooks/usePermissions'; // IMPORTAR EL HOOK
