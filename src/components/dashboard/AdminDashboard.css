@@ -1289,8 +1289,47 @@
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
 }
 
-/* Responsive Premium */
-@media (max-width: 1200px) {
+/* ==================== RESPONSIVE DESIGN COMPLETO ==================== */
+
+/* Desktop Extra Large (1400px+) */
+@media (min-width: 1400px) {
+  .executive-container {
+    padding: 48px 40px !important;
+  }
+  
+  .dashboard-title-executive {
+    font-size: 2.25rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  
+  .search-field-minimal .MuiOutlinedInput-root {
+    width: 400px;
+  }
+}
+
+/* Desktop Large (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .executive-container {
+    padding: 40px 32px !important;
+  }
+  
+  .executive-main {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Desktop Medium & Laptop (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
   .executive-container {
     padding: 32px 24px !important;
   }
@@ -1299,39 +1338,224 @@
     padding-left: 28px;
     padding-right: 28px;
   }
+  
+  .executive-toolbar {
+    padding: 0 28px !important;
+  }
+  
+  .dashboard-title-executive {
+    font-size: 2rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .stat-value-executive {
+    font-size: 2.75rem !important;
+  }
+  
+  .search-field-minimal .MuiOutlinedInput-root {
+    width: 320px;
+  }
+  
+  .executive-sidebar {
+    width: 220px;
+  }
+  
+  .executive-main {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+  }
 }
 
-@media (max-width: 900px) {
+/* Tablets Landscape (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .executive-sidebar {
+    width: 200px;
+  }
+  
   .executive-main {
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    padding: 0 20px;
+  }
+  
+  .executive-container {
+    padding: 28px 20px !important;
+  }
+  
+  .executive-toolbar {
+    padding: 0 20px !important;
   }
   
   .dashboard-title-executive {
     font-size: 1.875rem;
   }
   
+  .dashboard-subtitle {
+    font-size: 0.875rem;
+  }
+  
   .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  
+  .stat-value-executive {
+    font-size: 2.5rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.875rem !important;
+  }
+  
+  .search-field-minimal .MuiOutlinedInput-root {
+    width: 280px;
+  }
+  
+  .brand-name {
+    font-size: 1.25rem;
+  }
+  
+  .pro-badge {
+    font-size: 0.65rem !important;
+    padding: 3px 10px !important;
+  }
+  
+  .chart-card {
+    padding: 20px !important;
+  }
+  
+  .table-card-executive {
+    padding: 20px !important;
+  }
+  
+  /* Simplificar sidebar en tablets */
+  .sidebar-item-text {
+    font-size: 0.875rem;
+  }
+  
+  .sidebar-section-title {
+    font-size: 0.7rem;
   }
 }
 
-@media (max-width: 600px) {
-  .executive-toolbar {
-    padding: 0 16px !important;
-  }
-  
-  .executive-main {
-    margin-left: 0 !important;
-    width: 100% !important;
-    padding: 0 16px;
-  }
-  
+/* Tablets Portrait (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  /* Sidebar como overlay */
   .executive-sidebar {
     position: fixed;
     left: 0;
     top: 68px;
     height: calc(100vh - 68px);
+    width: 280px;
+    z-index: 1100;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+  }
+  
+  .executive-sidebar.open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-premium-lg);
+  }
+  
+  /* Overlay oscuro cuando sidebar está abierto */
+  .executive-dashboard::after {
+    content: '';
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1050;
+  }
+  
+  .executive-dashboard.sidebar-open::after {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .executive-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 20px;
+  }
+  
+  .executive-container {
+    padding: 24px 16px !important;
+  }
+  
+  .executive-toolbar {
+    padding: 0 16px !important;
+  }
+  
+  /* Mostrar botón de menú hamburguesa */
+  .menu-toggle-btn {
+    display: flex !important;
+  }
+  
+  .dashboard-title-executive {
+    font-size: 1.75rem;
+  }
+  
+  .dashboard-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .stat-card-executive {
+    padding: 20px !important;
+  }
+  
+  .stat-value-executive {
+    font-size: 2.25rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem !important;
+  }
+  
+  .search-field-minimal .MuiOutlinedInput-root {
+    width: 240px;
+  }
+  
+  .brand-name {
+    font-size: 1.2rem;
+  }
+  
+  .user-name-header {
+    display: none;
+  }
+  
+  .chart-card,
+  .table-card-executive {
+    padding: 18px !important;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+/* Mobile Large (480px - 575px) */
+@media (min-width: 480px) and (max-width: 575px) {
+  .executive-sidebar {
+    position: fixed;
+    left: 0;
+    top: 68px;
+    height: calc(100vh - 68px);
+    width: 280px;
     z-index: 1100;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
@@ -1342,20 +1566,492 @@
     box-shadow: var(--shadow-premium-lg);
   }
   
+  .executive-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 16px;
+  }
+  
+  .executive-container {
+    padding: 20px 12px !important;
+  }
+  
+  .executive-toolbar {
+    padding: 0 12px !important;
+    min-height: 64px !important;
+  }
+  
+  .executive-appbar {
+    height: 64px;
+  }
+  
+  .menu-toggle-btn {
+    display: flex !important;
+  }
+  
   .search-field-minimal {
+    display: none !important;
+  }
+  
+  .brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .brand-name {
+    font-size: 1.1rem;
+  }
+  
+  .brand-accent::after {
+    font-size: 0.45rem;
+  }
+  
+  .pro-badge {
     display: none;
+  }
+  
+  .user-name-header,
+  .user-role-header {
+    display: none;
+  }
+  
+  .user-avatar-minimal {
+    width: 36px;
+    height: 36px;
+    border-width: 2px;
   }
   
   .dashboard-title-executive {
     font-size: 1.5rem;
   }
   
-  .stat-value-executive {
-    font-size: 2.25rem !important;
+  .dashboard-subtitle {
+    font-size: 0.75rem;
+    display: none;
   }
   
   .stats-grid {
     grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+  
+  .stat-card-executive {
+    padding: 18px !important;
+  }
+  
+  .stat-value-executive {
+    font-size: 2rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem !important;
+  }
+  
+  .stat-icon {
+    font-size: 2rem !important;
+  }
+  
+  .chart-card,
+  .table-card-executive {
+    padding: 16px !important;
+  }
+  
+  .chart-title,
+  .table-title {
+    font-size: 1rem !important;
+  }
+  
+  /* Tabla responsive */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .MuiTableCell-root {
+    padding: 10px 8px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  /* Dialogs en móvil */
+  .executive-dialog .MuiDialog-paper {
+    margin: 16px;
+    max-width: calc(100% - 32px) !important;
+  }
+  
+  .executive-dialog-title {
+    padding: 24px 20px !important;
+  }
+  
+  .executive-dialog-actions {
+    padding: 20px !important;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .dialog-close-btn,
+  .dialog-action-btn {
+    width: 100%;
+  }
+}
+
+/* Mobile Medium (375px - 479px) */
+@media (min-width: 375px) and (max-width: 479px) {
+  .executive-sidebar {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    height: calc(100vh - 60px);
+    width: 260px;
+    z-index: 1100;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .executive-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .executive-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 12px;
+  }
+  
+  .executive-container {
+    padding: 16px 10px !important;
+  }
+  
+  .executive-toolbar {
+    padding: 0 10px !important;
+    min-height: 60px !important;
+  }
+  
+  .executive-appbar {
+    height: 60px;
+  }
+  
+  .brand-logo {
+    width: 34px;
+    height: 34px;
+  }
+  
+  .brand-name {
+    font-size: 1rem;
+    margin-left: 8px;
+  }
+  
+  .brand-accent::after {
+    content: '';
+  }
+  
+  .header-icon-btn {
+    padding: 6px !important;
+    margin: 0 2px !important;
+  }
+  
+  .user-avatar-minimal {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
+  
+  .dashboard-title-executive {
+    font-size: 1.375rem;
+    margin-bottom: 8px !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+  
+  .stat-card-executive {
+    padding: 16px !important;
+  }
+  
+  .stat-value-executive {
+    font-size: 1.875rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem !important;
+  }
+  
+  .stat-icon {
+    font-size: 1.75rem !important;
+  }
+  
+  .chart-card,
+  .table-card-executive {
+    padding: 14px !important;
+    margin-bottom: 12px;
+  }
+  
+  .chart-title,
+  .table-title {
+    font-size: 0.9rem !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .MuiTableCell-root {
+    padding: 8px 6px !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .dialog-main-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .executive-dialog-title {
+    padding: 20px 16px !important;
+  }
+  
+  .executive-dialog-actions {
+    padding: 16px !important;
+  }
+}
+
+/* Mobile Small (320px - 374px) */
+@media (max-width: 374px) {
+  .executive-sidebar {
+    position: fixed;
+    left: 0;
+    top: 56px;
+    height: calc(100vh - 56px);
+    width: 240px;
+    z-index: 1100;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .executive-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .executive-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 10px;
+  }
+  
+  .executive-container {
+    padding: 14px 8px !important;
+  }
+  
+  .executive-toolbar {
+    padding: 0 8px !important;
+    min-height: 56px !important;
+  }
+  
+  .executive-appbar {
+    height: 56px;
+  }
+  
+  .executive-appbar::after,
+  .executive-dashboard::before {
+    height: 2px;
+  }
+  
+  .brand-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+  }
+  
+  .brand-name {
+    font-size: 0.9rem;
+    margin-left: 6px;
+  }
+  
+  .brand-accent::after {
+    content: '';
+  }
+  
+  .header-icon-btn {
+    padding: 4px !important;
+    margin: 0 1px !important;
+  }
+  
+  .header-icon-btn .MuiSvgIcon-root {
+    font-size: 1.2rem;
+  }
+  
+  .user-avatar-minimal {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+    border-width: 2px;
+  }
+  
+  .dashboard-title-executive {
+    font-size: 1.25rem;
+    margin-bottom: 6px !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+  
+  .stat-card-executive {
+    padding: 14px !important;
+  }
+  
+  .stat-value-executive {
+    font-size: 1.75rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.65rem !important;
+  }
+  
+  .stat-icon {
+    font-size: 1.5rem !important;
+  }
+  
+  .chart-card,
+  .table-card-executive {
+    padding: 12px !important;
+    margin-bottom: 10px;
+  }
+  
+  .chart-title,
+  .table-title {
+    font-size: 0.85rem !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .table-container {
+    font-size: 0.7rem;
+  }
+  
+  .MuiTableCell-root {
+    padding: 6px 4px !important;
+    font-size: 0.7rem !important;
+  }
+  
+  .table-action-btn {
+    padding: 4px !important;
+    min-width: 32px !important;
+  }
+  
+  .dialog-main-avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+    border-width: 3px;
+  }
+  
+  .executive-dialog .MuiDialog-paper {
+    margin: 12px;
+    max-width: calc(100% - 24px) !important;
+  }
+  
+  .executive-dialog-title {
+    padding: 16px 12px !important;
+  }
+  
+  .executive-dialog-actions {
+    padding: 12px !important;
+  }
+  
+  .dialog-close-btn,
+  .dialog-action-btn {
+    padding: 8px 20px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Landscape Orientation para móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+  .executive-appbar {
+    height: 52px;
+  }
+  
+  .executive-toolbar {
+    min-height: 52px !important;
+  }
+  
+  .executive-sidebar {
+    top: 52px;
+    height: calc(100vh - 52px);
+  }
+  
+  .dashboard-title-executive {
+    font-size: 1.2rem;
+  }
+  
+  .stat-card-executive {
+    padding: 12px !important;
+  }
+  
+  .stat-value-executive {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Ajustes específicos para iPad */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .executive-sidebar {
+    width: 240px;
+  }
+  
+  .executive-main {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+  }
+}
+
+/* iPad Pro en portrait */
+@media (min-width: 1024px) and (max-width: 1024px) and (orientation: portrait) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mejoras de touch targets para móviles */
+@media (max-width: 767px) {
+  button,
+  .MuiIconButton-root,
+  .sidebar-item,
+  .table-action-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevenir zoom en iOS */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Soporte para notch en iPhone X/11/12/13/14/15 */
+@supports (padding-top: env(safe-area-inset-top)) {
+  @media (max-width: 767px) {
+    .executive-appbar {
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    .executive-sidebar {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+}
+
+/* Optimizaciones de rendimiento para móviles */
+@media (max-width: 767px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .stat-card-executive,
+  .chart-card,
+  .table-card-executive {
+    animation: none; /* Desactivar animaciones en móvil para mejor rendimiento */
   }
 }
 
