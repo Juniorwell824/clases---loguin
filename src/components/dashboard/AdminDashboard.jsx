@@ -224,15 +224,32 @@ const AdminDashboard = () => {
           const userDoc = await getDoc(doc(db, 'usuarios', currentUser.uid));
           if (userDoc.exists()) {
             const userData = userDoc.data();
+            console.log("Datos del usuario cargados:", userData); // Debug
             setAdminInfo({
               nombres: userData.nombres || '',
               apellidos: userData.apellidos || '',
               email: userData.email || currentUser.email || '',
               rol: userData.rol || 'admin'
             });
+          } else {
+            // Si no existe el documento, usar email del currentUser
+            console.log("No existe documento de usuario, usando email"); // Debug
+            setAdminInfo({
+              nombres: currentUser.displayName?.split(' ')[0] || currentUser.email?.split('@')[0] || '',
+              apellidos: currentUser.displayName?.split(' ').slice(1).join(' ') || '',
+              email: currentUser.email || '',
+              rol: 'admin'
+            });
           }
         } catch (error) {
           console.error("Error cargando info del admin:", error);
+          // Fallback en caso de error
+          setAdminInfo({
+            nombres: currentUser.displayName?.split(' ')[0] || currentUser.email?.split('@')[0] || '',
+            apellidos: currentUser.displayName?.split(' ').slice(1).join(' ') || '',
+            email: currentUser.email || '',
+            rol: 'admin'
+          });
         }
       }
     };
@@ -868,16 +885,37 @@ const AdminDashboard = () => {
             }}
             onClick={(e) => setAnchorEl(e.currentTarget)}
           >
-            <Box sx={{ textAlign: 'right', display: { xs: 'none', sm: 'block' } }}>
-              <Typography variant="body2" fontWeight={600}>
-                {adminInfo.nombres} {adminInfo.apellidos}
+            <Box sx={{ 
+              textAlign: 'right', 
+              minWidth: 'fit-content',
+              whiteSpace: 'nowrap'
+            }}>
+              <Typography 
+                variant="body2" 
+                fontWeight={600}
+                className="user-name-header"
+                sx={{ 
+                  whiteSpace: 'nowrap',
+                  overflow: 'visible',
+                  display: 'block'
+                }}
+              >
+                {adminInfo.nombres && adminInfo.apellidos 
+                  ? `${adminInfo.nombres} ${adminInfo.apellidos}`
+                  : adminInfo.email || 'Usuario'}
               </Typography>
-              <Typography variant="caption" color="textSecondary">
+              <Typography 
+                variant="caption" 
+                className="user-role-header"
+                sx={{ display: 'block' }}
+              >
                 Super Admin
               </Typography>
             </Box>
             <Avatar className="user-avatar-minimal">
-              {adminInfo.nombres.charAt(0)}{adminInfo.apellidos.charAt(0)}
+              {adminInfo.nombres && adminInfo.apellidos
+                ? `${adminInfo.nombres.charAt(0)}${adminInfo.apellidos.charAt(0)}`
+                : adminInfo.email ? adminInfo.email.charAt(0).toUpperCase() : 'U'}
             </Avatar>
           </Box>
 
@@ -1060,11 +1098,23 @@ const AdminDashboard = () => {
             {sidebarOpen && (
               <Box className="admin-info">
                 <Avatar className="admin-avatar">
-                  {adminInfo.nombres.charAt(0)}
+                  {adminInfo.nombres && adminInfo.apellidos
+                    ? adminInfo.nombres.charAt(0)
+                    : adminInfo.email ? adminInfo.email.charAt(0).toUpperCase() : 'U'}
                 </Avatar>
                 <Box sx={{ flex: 1, minWidth: 0 }}>
-                  <Typography variant="body2" fontWeight={600} noWrap>
-                    {adminInfo.nombres} {adminInfo.apellidos}
+                  <Typography 
+                    variant="body2" 
+                    fontWeight={600}
+                    sx={{ 
+                      whiteSpace: 'normal',
+                      wordWrap: 'break-word',
+                      lineHeight: 1.3
+                    }}
+                  >
+                    {adminInfo.nombres && adminInfo.apellidos 
+                      ? `${adminInfo.nombres} ${adminInfo.apellidos}`
+                      : adminInfo.email || 'Usuario'}
                   </Typography>
                   <Typography variant="caption" color="textSecondary" noWrap>
                     {adminInfo.email}

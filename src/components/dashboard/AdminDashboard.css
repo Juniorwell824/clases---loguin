@@ -304,6 +304,23 @@
     0 0 30px rgba(212, 175, 55, 0.2);
 }
 
+/* Nombre del usuario en el header */
+.user-name-header {
+  color: var(--neutral-900) !important;
+}
+
+.dark-mode .user-name-header {
+  color: var(--neutral-50) !important;
+}
+
+.user-role-header {
+  color: var(--neutral-600) !important;
+}
+
+.dark-mode .user-role-header {
+  color: var(--neutral-400) !important;
+}
+
 /* Sidebar Premium - Con borde dorado lateral */
 .executive-sidebar {
   width: 280px;
